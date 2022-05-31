@@ -10,6 +10,7 @@ class Category extends Model
 {
     use HasFactory , SoftDeletes;
 
+
     protected $fillable = ['id','title'];
     protected $hidden = ['created_at','updated_at'];
 
