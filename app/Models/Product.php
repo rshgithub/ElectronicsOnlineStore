@@ -12,7 +12,7 @@ class Product extends Model
 
     protected $fillable = ['id', 'category_id', 'name', 'image', 'status', 'description', 'description'];
 
-    protected $hidden = ['created_at', 'updated_at', 'category'];
+    protected $hidden = ['created_at', 'updated_at' ,'deleted_at', 'category' ];
 
     protected $appends = ['dish_category_name'];
 

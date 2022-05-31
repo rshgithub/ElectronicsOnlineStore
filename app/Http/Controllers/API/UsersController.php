@@ -16,10 +16,30 @@ class UsersController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function index()
-{
-    return response()->json( User::all() );
+    {
+        return response()->json( User::all() );
+    }
 
-}
+    public function getDeletedUsers()
+    {
+        return response()->json( (User::onlyTrashed()->get() ));
+    }
+
+    public function getUsersWithDeleted()
+    {
+        return response()->json( (User::withTrashed()->get() ));
+    }
+
+    public function restoreDeletedUser($user)
+    {
+        $trashed = User::withTrashed()->find($user);
+        if($trashed) {
+            $trashed->restore();
+            return response()->json(['message'=>'success' , 'data' => $trashed]);
+        }else{
+            return response()->json(['message' => 'this User is not trashed']);
+        }
+    }
 
     /**
      * Show the form for creating a new resource.

@@ -12,7 +12,7 @@ class Category extends Model
 
 
     protected $fillable = ['id','title'];
-    protected $hidden = ['created_at','updated_at'];
+    protected $hidden = ['created_at','updated_at','deleted_at'];
 
     public function products(){
         return $this->hasMany(Product::class,'category_id','id');

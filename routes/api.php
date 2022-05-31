@@ -33,10 +33,31 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('AllUsers', [UsersController::class, 'deleteAllUsers']);
     Route::get('UserProfile/{id}', [UsersController::class, 'getUserProfile']);
 
+    Route::get('getDeletedUsers', [UsersController::class, 'getDeletedUsers']);
+    Route::get('getUsersWithDeleted', [UsersController::class, 'getUsersWithDeleted']);
+    Route::get('restoreDeletedUser/{id}', [UsersController::class, 'restoreDeletedUser']);
+
     Route::resource('users', UsersController::class);
 
+    // ------------------------------------------------------ Users ---------------------------------------------------
+
     Route::apiResource('home', HomeController::class);
+
+    // ------------------------------------------------------ Users ---------------------------------------------------
+
+    Route::get('getDeletedProducts', [ProductsController::class, 'getDeletedProducts']);
+    Route::get('getProductsWithDeleted', [ProductsController::class, 'getProductsWithDeleted']);
+    Route::get('restoreDeletedProduct/{id}', [ProductsController::class, 'restoreDeletedProduct']);
+
     Route::resource('products',ProductsController::class);
+
+    // ------------------------------------------------------ Users ---------------------------------------------------
+
+    Route::get('getDeletedCategories', [CategoriesController::class, 'getDeletedCategories']);
+    Route::get('getCategoriesWithDeleted', [CategoriesController::class, 'getCategoriesWithDeleted']);
+    Route::get('getCategoryProducts/{id}', [CategoriesController::class, 'getCategoryProducts']);
+    Route::get('restoreDeletedCategory/{id}', [CategoriesController::class, 'restoreDeletedCategory']);
+
     Route::resource('categories', CategoriesController::class);
 
 });

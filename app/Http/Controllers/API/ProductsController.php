@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Products\newProductRequest;
+use App\Http\Requests\Products\updateProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -15,7 +17,28 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json( Product::all());
+    }
+
+    public function getDeletedProducts()
+    {
+        return response()->json( (Product::onlyTrashed()->get() ));
+    }
+
+    public function getProductsWithDeleted()
+    {
+        return response()->json( (Product::withTrashed()->get() ));
+    }
+
+    public function restoreDeletedProduct($product)
+    {
+        $trashed = Product::withTrashed()->find($product);
+        if($trashed) {
+            $trashed->restore();
+            return response()->json(['message'=>'success' , 'data' => $trashed]);
+        }else{
+            return response()->json(['message' => 'this Product is not trashed']);
+        }
     }
 
     /**
