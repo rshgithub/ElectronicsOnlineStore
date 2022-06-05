@@ -7,9 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Users\newUserRequest;
 use App\Http\Requests\Users\updateUserRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 
-class UsersController extends Controller{
+class UsersController extends Controller
+{
     /**
      * Display a listing of the resource.
      *
@@ -17,26 +17,26 @@ class UsersController extends Controller{
      */
     public function index()
     {
-        return response()->json( User::all() );
+        return response()->json(User::all());
     }
 
     public function getDeletedUsers()
     {
-        return response()->json( (User::onlyTrashed()->get() ));
+        return response()->json((User::onlyTrashed()->get()));
     }
 
     public function getUsersWithDeleted()
     {
-        return response()->json( (User::withTrashed()->get() ));
+        return response()->json((User::withTrashed()->get()));
     }
 
     public function restoreDeletedUser($user)
     {
         $trashed = User::withTrashed()->find($user);
-        if($trashed) {
+        if ($trashed) {
             $trashed->restore();
-            return response()->json(['message'=>'success' , 'data' => $trashed]);
-        }else{
+            return response()->json(['message' => 'success', 'data' => $trashed]);
+        } else {
             return response()->json(['message' => 'this User is not trashed']);
         }
     }
@@ -47,84 +47,84 @@ class UsersController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function create()
-{
+    {
 
-}
+    }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(newUserRequest $request)
-{
-    $user = User::create($request->validated());
-    if($request->file){
-        $file = $request->file->store('public','public');
-        $user->media()->create(['name'=>$file]);
-    }
-    return response()->json(['message'=>'success']);
+    {
+        $user = User::create($request->validated());
+        if ($request->file) {
+            $file = $request->file->store('public', 'public');
+            $user->media()->create(['name' => $file]);
+        }
+        return response()->json(['message' => 'success']);
 
-}
+    }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
-    public function show( $user)
-{
-    if($user) {
-        return response()->json(['message'=>'success' , 'data'=>  $user]);
-    }else{
-        return response()->json(['message' => 'this user does not exist']);
+    public function show($user)
+    {
+        if ($user) {
+            return response()->json(['message' => 'success', 'data' => $user]);
+        } else {
+            return response()->json(['message' => 'this user does not exist']);
+        }
     }
-}
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
-{
-}
+    {
+    }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
     public function update(updateUserRequest $request, $user)
-{
-    if($user) {
-        $user->update($request->validated());
-        return response()->json(['message'=>'success' , 'data'=>  $user]);
-    }else{
-        return response()->json(['message' => 'this user does not exist']);
+    {
+        if ($user) {
+            $user->update($request->validated());
+            return response()->json(['message' => 'success', 'data' => $user]);
+        } else {
+            return response()->json(['message' => 'this user does not exist']);
+        }
     }
-}
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $user
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
     public function destroy($user)
-{
-    if($user) {
-        $user->delete();
-        return response()->json(['message'=>'success']);
-    }else{
-        return response()->json(['message' => 'this user does not exist']);
+    {
+        if ($user) {
+            $user->delete();
+            return response()->json(['message' => 'success']);
+        } else {
+            return response()->json(['message' => 'this user does not exist']);
+        }
     }
-}
 
 
 }

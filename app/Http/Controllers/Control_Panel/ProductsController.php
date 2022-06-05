@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Control_Panel;
 
 use App\Http\Controllers\Controller;
+
 use App\Http\Requests\Products\newProductRequest;
 use App\Http\Requests\Products\updateProductRequest;
 use App\Models\Product;
@@ -74,7 +75,7 @@ class ProductsController extends Controller
     public function edit($product){
 
         if($product) {
-            return view('control_panel.products.update',compact('Product'));
+            return view('control_panel.products.update',compact('product'));
         }else{
             return redirect('/')->with('error','this Product does not exist');
         }

@@ -16,10 +16,12 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
     protected $fillable = [
         'name',
         'email',
         'phone',
+        'role',
         'password',
     ];
 
@@ -33,6 +35,7 @@ class User extends Authenticatable
         'remember_token',
         'created_at',
         'updated_at',
+        'deleted_at',
     ];
 
     /**
@@ -44,5 +47,7 @@ class User extends Authenticatable
         'verified_at' => 'datetime',
     ];
 
-
+    public function getUserRoleAttribute(){
+        if($this->role == 0) { return 'admin'; } else { return 'user'; }
+    }
 }

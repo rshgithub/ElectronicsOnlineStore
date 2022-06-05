@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/home';
+    public const HOME = '/users';
 
     /**
      * The controller namespace for the application.
@@ -39,6 +40,15 @@ class RouteServiceProvider extends ServiceProvider
     {
 
 
+        Route::bind('user',function($model_id){
+            $model = User::find($model_id);
+            if($model){
+                return $model;
+            }else{
+                return false;
+            }
+        });
+
         Route::bind('category',function($model_id){
             $model = Category::find($model_id);
             if($model){
@@ -47,6 +57,7 @@ class RouteServiceProvider extends ServiceProvider
                 return false;
             }
         });
+
         Route::bind('product',function($model_id){
             $model = Product::find($model_id);
             if($model){

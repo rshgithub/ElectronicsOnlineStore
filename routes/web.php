@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Control_Panel\CategoriesController;
+use App\Http\Controllers\Control_Panel\ProductsController;
+use App\Http\Controllers\Control_Panel\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +16,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::resource('users', UsersController::class);
+Route::resource('categories', CategoriesController::class);
+Route::resource('products', ProductsController::class);
+
+
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(route('login'));
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';

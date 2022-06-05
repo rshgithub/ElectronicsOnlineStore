@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Control_Panel;
 
 use App\Http\Controllers\Controller;
+
 use App\Http\Requests\Users\newUserRequest;
 use App\Http\Requests\Users\updateUserRequest;
 use App\Models\User;

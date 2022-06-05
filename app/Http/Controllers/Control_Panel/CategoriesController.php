@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Control_Panel;
 
+
 use App\Http\Controllers\Controller;
+
 use App\Http\Requests\Categories\newCategoryRequest;
 use App\Http\Requests\Categories\updateCategoryRequest;
 use App\Models\Category;
