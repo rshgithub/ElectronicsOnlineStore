@@ -10,11 +10,15 @@ class Product extends Model
 {
     use HasFactory , SoftDeletes;
 
-    protected $fillable = ['id', 'category_id', 'name', 'image', 'status', 'description', 'description'];
+    protected $fillable = ['id', 'category_id','price', 'name', 'image', 'status', 'description'];
 
     protected $hidden = ['created_at', 'updated_at' ,'deleted_at', 'category' ];
 
-    protected $appends = ['dish_category_name'];
+    protected $appends = ['category_title','image'];
+
+//    public function getImageAttribute(){
+//        return $this->image ? url('/storage/'.$this->image) : "no image for this product";
+//    }
 
     public function category()
     {
@@ -26,9 +30,14 @@ class Product extends Model
         return $this->category ? $this->category->title : 'category not found';
     }
 
-    public function getCategoryNameAttribute()
+    public function getCategoryTitleAttribute()
     {
-        return $this->category ? $this->category->name : 'category not found';
+        return $this->category ? $this->category->title : 'category not found';
     }
+
+    public function getProductStatusAttribute(){
+        if($this->status == 0) { return 'Old'; } else { return 'New'; }
+    }
+
 
 }

@@ -1,5 +1,4 @@
 @extends('control_panel.master')
-
 @section('content')
 
     <!-- partial -->
@@ -9,38 +8,39 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="shadow p-3 mb-5 bg-body rounded">
-                            <h3 class="text-center">Producsts Table</h3>
+                            <h3 class="text-center">Products Table</h3>
                         </div>
-                        <a href="{{ route('users.create') }}" class="btn btn-outline-success" role="button"
-                           aria-pressed="true">Creat New Product</a>
+                        <a href="{{ route('products.create') }}" class="btn btn-outline-success" role="button" aria-pressed="true">Creat New Product</a>
                         </p>
-                        <table class="table table-success table-striped">
+                        <table class="table table-striped">
                             <thead>
-                            <tr>
+                            <tr class="table-success text-center">
                                 <th>id</th>
+                                <th>Image</th>
                                 <th>Name</th>
+                                <th>Category Title</th>
                                 <th>Price</th>
-                                <th>Details</th>
+                                <th>Description</th>
+                                <th>Status</th>
                                 <th>Options</th>
                             </tr>
 
                             @foreach($products as $product)
-                                <tr>
-                                    <td>{{ $product -> id }}</td>
-                                    <td>{{ $product -> name }}</td>
-                                    <td>{{ $product -> Price }}</td>
-                                    <td>{{ $product -> Details }}</td>
+                                <tr class="text-center">
+                                    <td>{{ $product->id }}</td>
+                                    <td> <img src="{{ $product->image }}"> </td>
+                                    <td>{{ $product->name }}</td>
+                                    <td>{{ $product->category_title }}</td>
+                                    <td>{{ $product->price }}</td>
+                                    <td>{{ $product->description }}</td>
+                                    <td>{{ $product->product_status }}</td>
                                     <td>
+                                        <a href="{{ route('products.edit',$product->id) }}"class="btn btn-outline-warning">Edit</a>
 
-                                        <a href="{{ route('products.edit' , $product->id) }}" class="btn btn-warning"><i
-                                                class="mdi mdi-grease-pencil"></i></a>
-
-                                        <form action="{{ route('products.destroy',$product->id) }}" method="post"
-                                              style="display: inline-block">
+                                        <form action="{{ route('products.destroy',$product->id) }}" method="post" style="display: inline-block">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class=" btn btn-danger"><i
-                                                    class="mdi mdi-delete-forever"></i></button>
+                                            <button type="submit" class="btn btn-outline-danger">Delete</button>
                                         </form>
                                     </td>
                                 </tr>

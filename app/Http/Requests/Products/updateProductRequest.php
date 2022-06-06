@@ -25,7 +25,7 @@ class updateProductRequest extends FormRequest
     {
         return [
 
-            'name'=>'sometimes|string|unique:products,name'.$this->product_id,
+            'name'=>'sometimes|string'.$this->product_id,
             'category_id'=>'sometimes|numeric|exists:categories,id',
             'status' =>  'sometimes|numeric|in:0,1',
             'description'=>'sometimes|max:1000',
@@ -38,7 +38,6 @@ class updateProductRequest extends FormRequest
     {
         return [
             'name.string' => 'Name must be string!',
-            'name.unique' => 'Name must be unique!',
             'category_id.numeric' => 'category_id must be numeric!',
             'category_id.exists' => 'category_id must exist in categories table!',
             'status.numeric' => 'status must be numeric!',

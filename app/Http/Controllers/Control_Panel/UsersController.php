@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Users\newUserRequest;
 use App\Http\Requests\Users\updateUserRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -41,11 +42,15 @@ class UsersController extends Controller
      */
     public function store(newUserRequest $request)
     {
-        $user = User::create($request->validated());
-        if($request->file){
-            $file = $request->file->store('public','public');
-            $user->media()->create(['name'=>$file]);
-        }
+        $defaultUserPass =  12345678 ;
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone, 
+            'password' => Hash::make($defaultUserPass),
+        ]);
+
         return redirect(route('users.index'));
     }
 

@@ -1,7 +1,5 @@
 @extends('control_panel.master')
-
 @section('content')
-
 
     <div class="main-panel">
         <div class="content-wrapper">
@@ -11,7 +9,7 @@
                         <div class="shadow p-3 mb-5 bg-body rounded">
                             <h3 class="text-center">Categories Table</h3>
                         </div>
-                        <a href="{{ route('users.create') }}" class="btn btn-outline-warning" role="button" aria-pressed="true">Creat New Category</a>
+                        <a href="{{ route('categories.create') }}" class="btn btn-outline-warning" role="button" aria-pressed="true">Creat New Category</a>
                         </p>
                         <table class="table table-striped">
                             <thead>
@@ -23,11 +21,11 @@
                             </thead>
                             <tbody>
                             @foreach($categories as $category)
-                                <tr>
+                                <tr class="text-center">
                                     <td>{{ $category->id }}</td>
                                     <td>{{ $category->title }}</td>
                                     <td>
-                                        <form action="{{ route('users.destroy',$user->id) }}" method="post" style="display: inline-block">
+                                        <form action="{{ route('categories.destroy',$category->id) }}" method="post" style="display: inline-block">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-outline-danger">Delete</button>

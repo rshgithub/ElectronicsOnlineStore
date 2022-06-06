@@ -26,21 +26,20 @@
                     <label for="userRole">User Role</label>
                     <select value="{{old('role')}}"  class="form-select form-select-sm" aria-label=".form-select-sm example" id="userRole">
                         <option value="1">user</option>
-                        <option value="2">admin</option>
+                        <option value="0">admin</option>
                     </select>
                     @if($errors->has('role'))
                         <span style="color: red;">{{ $errors->first('role') }}</span>
                     @endif
                 </div>
                 <div class="form-group">
-                    <label for="Address">Address</label>
-                    <input type="text" name="address" value="{{old('address')}}" class="form-control" id="Address" placeholder="Address">
-                    @if($errors->has('address'))
-                        <span style="color: red;">{{ $errors->first('address') }}</span>
+                    <label for="Phone">Phone</label>
+                    <input type="text" name="phone" value="{{old('phone')}}" class="form-control" id="Phone" placeholder="Phone">
+                    @if($errors->has('phone'))
+                        <span style="color: red;">{{ $errors->first('phone') }}</span>
                     @endif
                 </div>
-
-                <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
+                <button type="submit" class="btn btn-outline-primary">Submit</button>
             </form>
         </div>
     </div>

@@ -44,7 +44,9 @@ class ProductsController extends Controller
      */
     public function store(newProductRequest $request)
     {
-        $product = Product::create($request->validated());
+        Product::create($request->validated());
+        $request->image->store('public','public');
+
         return redirect(route('products.index'));
 //        redirect(route('products.index')->with('success','You added a Product successfully.'));
     }
@@ -57,11 +59,6 @@ class ProductsController extends Controller
      */
 
     public function show($product){
-//        if($product) {
-//            return view('control_panel.products.update',compact('Product'));
-//        }else{
-//            return redirect('/')->with('error','this user does not exist');
-//        }
     }
 
 
@@ -92,6 +89,11 @@ class ProductsController extends Controller
     {
         if($product) {
             $product->update($request->validated());
+
+            $file = $request->image->store('public','public');
+            if($request->hasFile('image')){
+                $product->update(['name'=>$file]);
+            }
             return redirect(route('products.index'));
 //            redirect(route('products.index')->with('success','You edited the Product successfully.'));
         }else{
