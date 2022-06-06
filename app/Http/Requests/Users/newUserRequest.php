@@ -27,7 +27,7 @@ class newUserRequest extends FormRequest
         return [
             'name' => 'required|string|max:25',
             'email' => 'required|string|email|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix|max:255|unique:users,email',
-            'phone' =>  'required|string|between:10,14',
+            'phone' =>  'required|string',
 
         ];
     }
@@ -42,8 +42,6 @@ class newUserRequest extends FormRequest
             'name.required' => 'name is required!',
             'phone.required' => 'phone is required!',
             'phone.string' => 'phone is string!',
-            'phone.unique' => 'phone must be unique!',
-            'phone.max:14' => 'phone_number maximum = 14!',
             'email.required' => 'email is required!',
             'email.email' => 'email must be valid email address!',
         ];
