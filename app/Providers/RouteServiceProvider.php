@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Ad;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
@@ -60,6 +61,16 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::bind('product',function($model_id){
             $model = Product::find($model_id);
+            if($model){
+                return $model;
+            }else{
+                return false;
+            }
+        });
+
+
+        Route::bind('ad',function($model_id){
+            $model = Ad::find($model_id);
             if($model){
                 return $model;
             }else{
