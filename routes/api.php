@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\ProductsController;
 use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,14 +22,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::post('login', [AuthController::class, 'login']);
+Route::post('login', [AuthenticatedSessionController::class, 'login']);
 
 Route::resource('register', RegisteredUserController::class);
 
 Route::middleware(['auth:sanctum'])->group(function () {
 
-    Route::post('logout', [AuthController::class, 'logout']);
-    Route::post('changePassword', [AuthController::class, 'changePassword']);
+    Route::post('logout', [AuthenticatedSessionController::class, 'logout']);
+    Route::post('changePassword', [AuthenticatedSessionController::class, 'changePassword']);
 
     // ----------------------------------------------------- users -----------------------------------------------------
 

@@ -25,6 +25,12 @@ class CategoriesController extends Controller
     }
 
 
+    public function getCategoryProducts($category)
+    {
+        $categoryProducts = Category::with('products')->find($category);
+        return view('control_panel.categories.categoryProducts', compact('categoryProducts'));
+    }
+
 
     /**
      * Show the form for creating a new resource.

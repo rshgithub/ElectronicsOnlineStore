@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Control_Panel\CategoriesController;
 use App\Http\Controllers\Control_Panel\ProductsController;
 use App\Http\Controllers\Control_Panel\UsersController;
@@ -17,14 +19,30 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::resource('users', UsersController::class);
-Route::resource('categories', CategoriesController::class);
-Route::resource('products', ProductsController::class);
 
+Route::resource('auth', AuthenticatedSessionController::class);
+Route::resource('register', RegisteredUserController::class);
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::post('logout', [AuthenticatedSessionController::class, 'logout']);
+
+    Route::resource('users', UsersController::class);
+
+    Route::get('/getCategoryProducts/{id}', [CategoriesController::class,'getCategoryProducts'])->name('categories.getCategoryProducts');
+
+    Route::resource('categories', CategoriesController::class);
+    Route::resource('products', ProductsController::class);
+
+});
 
 Route::get('/', function () {
     return redirect(route('login'));
 });
+
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 Route::get('/dashboard', function () {
     return view('dashboard');

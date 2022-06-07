@@ -16,6 +16,8 @@
                             <tr class="table-warning text-center">
                                 <th> id </th>
                                 <th> title </th>
+                                <th> products count </th>
+                                <th> category products </th>
                                 <th> options </th>
                             </tr>
                             </thead>
@@ -24,6 +26,8 @@
                                 <tr class="text-center">
                                     <td>{{ $category->id }}</td>
                                     <td>{{ $category->title }}</td>
+                                    <td>{{ $category->products_count }}</td>
+                                    <td><a href="{{ route('categories.getCategoryProducts',$category->id) }}" class="btn btn-outline-primary">products</a><td>
                                     <td>
                                         <form action="{{ route('categories.destroy',$category->id) }}" method="post" style="display: inline-block">
                                             @csrf
