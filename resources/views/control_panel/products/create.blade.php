@@ -1,4 +1,4 @@
-@extends('control_panel.master')
+@extends('control_panel.components.master')
 @section('content')
 
     <div class="col-md-12 grid-margin stretch-card">
@@ -44,8 +44,8 @@
                         @endif
                     </div>
                     <div class="form-group">
-                        <label for="Image">Image</label>
-                        <input type="file" name="image" class="form-control" id="Image" placeholder="Image">
+                        <label for="image">Image</label>
+                        <input type="file" name="image" class="form-control" id="image" placeholder="Image">
                         @if($errors->has('image'))
                             <span style="color: red;">{{ $errors->first('image') }}</span>
                         @endif

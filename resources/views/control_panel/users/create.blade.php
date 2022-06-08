@@ -1,4 +1,4 @@
-@extends('control_panel.master')
+@extends('control_panel.components.master')
 @section('content')
 
 <div class="col-md-12 grid-margin stretch-card">
@@ -17,14 +17,13 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
                     <input type="email" name="email" value="{{old('email')}}" class="form-control" id="exampleInputEmail1" placeholder="Email">
-                    <small class="text-danger">* you will never be able to change your email later , please enter carefully .</small>
                     @if($errors->has('email'))
                         <span style="color: red;">{{ $errors->first('email') }}</span>
                     @endif
                 </div>
                 <div class="form-group">
                     <label for="userRole">User Role</label>
-                    <select value="{{old('role')}}"  class="form-select form-select-sm" aria-label=".form-select-sm example" id="userRole">
+                    <select style="margin-left: 10px" value="{{old('role')}}" name="role" class="form-select form-select-sm" aria-label=".form-select-sm example" id="userRole">
                         <option value="1">user</option>
                         <option value="0">admin</option>
                     </select>

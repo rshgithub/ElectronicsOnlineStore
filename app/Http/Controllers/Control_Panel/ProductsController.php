@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Requests\Products\newProductRequest;
 use App\Http\Requests\Products\updateProductRequest;
+use App\Models\Hotel;
 use App\Models\Product;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use function redirect;
 use function view;
 
@@ -44,9 +47,23 @@ class ProductsController extends Controller
      */
     public function store(newProductRequest $request)
     {
-        Product::create($request->validated());
-        $request->image->store('public','public');
+        $product = Product::create($request->validated());
+//        $request->image->store('public','public');
 
+
+//        if($request->image){
+//            $file = $request->image->store('public','public');
+//            $product->create(['image'=>$file]);
+//        }
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $fileName = time() . '.' . $file->getClientOriginalExtension();
+            $product->image = 'attachments/' . $fileName;
+            Storage::disk('public')->put('attachments/' . $fileName, $file, 'public');
+        }
+
+        dd($product);
         return redirect(route('products.index'));
 //        redirect(route('products.index')->with('success','You added a Product successfully.'));
     }

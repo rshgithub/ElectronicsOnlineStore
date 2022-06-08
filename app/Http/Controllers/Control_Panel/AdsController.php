@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Control_Panel;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Ads\newAdRequest;
+use App\Http\Requests\Ads\updateAdRequest;
 use App\Models\Ad;
 use Illuminate\Http\Request;
 
@@ -15,8 +17,10 @@ class AdsController extends Controller
      */
     public function index()
     {
-        //
+        $ads = Ad::all();
+        return view('control_panel.ads.index',compact('ads'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -25,7 +29,7 @@ class AdsController extends Controller
      */
     public function create()
     {
-        //
+        return view('control_panel.ads.create');
     }
 
     /**
@@ -34,9 +38,9 @@ class AdsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(newAdRequest $request)
     {
-        //
+
     }
 
     /**
@@ -56,9 +60,13 @@ class AdsController extends Controller
      * @param  \App\Models\Ad  $ad
      * @return \Illuminate\Http\Response
      */
-    public function edit(Ad $ad)
+    public function edit( $ad)
     {
-        //
+        if($ad) {
+            return view('control_panel.ads.update',compact('ad'));
+        }else{
+            return redirect('/')->with('error','this ad does not exist');
+        }
     }
 
     /**
@@ -68,9 +76,15 @@ class AdsController extends Controller
      * @param  \App\Models\Ad  $ad
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ad $ad)
+    public function update(updateAdRequest $request, $ad)
     {
-        //
+        if($ad) {
+            $ad->update($request->validated());
+            return redirect(route('ads.index'));
+//            redirect(route('categories.index')->with('success','You edited the Category successfully.'));
+        }else{
+            return redirect('/')->with('error','this ad does not exist');
+        }
     }
 
     /**
@@ -79,8 +93,13 @@ class AdsController extends Controller
      * @param  \App\Models\Ad  $ad
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ad $ad)
+    public function destroy($ad)
     {
-        //
+        if($ad) {
+            $ad->delete();
+            return redirect(route('ads.index'));
+        }else{
+            return redirect('/')->with('error','this ad does not exist');
+        }
     }
 }

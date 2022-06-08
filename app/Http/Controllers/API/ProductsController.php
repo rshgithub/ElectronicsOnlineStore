@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Products\newProductRequest;
 use App\Http\Requests\Products\updateProductRequest;
+use App\Http\Resources\productResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -61,6 +62,7 @@ class ProductsController extends Controller
     {
 
         $product = Product::create($request->validated());
+        //file
         return response()->json(['message' => 'success', 'data' => ProductResource::make($product)]);
     }
 
@@ -98,6 +100,7 @@ class ProductsController extends Controller
     {
         if($product) {
             $product->update($request->validated());
+            //file
             return response()->json(['message'=>'success' , 'data'=> ProductResource::make($product)]);
         }else{
             return response()->json(['message' => 'this Product does not exist']);
@@ -117,5 +120,23 @@ class ProductsController extends Controller
         }else{
             return response()->json(['message' => 'this Product does not exist']);
         }
+    }
+
+
+    public function search(Request $name)
+    {
+        $product = Product::where('name', $name)->get();
+        return response()->json(['message'=>'success', 'data'=> ProductResource::collection($product)]);
+    }
+
+
+    public function searchProduct(Request $request)
+    {
+        $txtSearch = request('data');
+        $products = Product::query()
+            ->where('name', 'LIKE', "%" . $txtSearch . "%")
+            ->orwhere('description', 'LIKE', "%" . $txtSearch . "%")->get();
+
+        return response()->json(['message' => 'success', 'hotels' => $products]);
     }
 }

@@ -126,14 +126,4 @@ class CategoriesController extends Controller
         }
     }
 
-    public function deleteAllCategories(){
-        $count = DB::table('categories')->count();
-        if($count != 0) {
-            Category::truncate();
-            return response()->json(['message'=>'success']);
-        }else {
-            return response()->json(['message' => 'table is already empty']);
-        }
-
-    }
 }

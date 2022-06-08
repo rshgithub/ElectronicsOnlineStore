@@ -25,7 +25,7 @@ class updateCategoryRequest extends FormRequest
     {
         return [
 
-            'title'=>'required|string|unique:categories,title'.$this->category_id,
+            'title'=>'required|string|unique:categories,id'.$this->category_id,
         ];
     }
 

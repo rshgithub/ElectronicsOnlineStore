@@ -60,10 +60,6 @@ class UsersController extends Controller
     public function store(newUserRequest $request)
     {
         $user = User::create($request->validated());
-        if ($request->file) {
-            $file = $request->file->store('public', 'public');
-            $user->media()->create(['name' => $file]);
-        }
         return response()->json(['message' => 'success']);
 
     }

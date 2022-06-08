@@ -27,7 +27,8 @@ class newUserRequest extends FormRequest
         return [
             'name' => 'required|string|max:25',
             'email' => 'required|string|email|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix|max:255|unique:users,email',
-            'phone' =>  'required|string',
+            'phone' =>  'required|string|min:10|max:14|unique:users,phone',
+            'role' =>  'required|numeric|in:1,0',
 
         ];
     }
@@ -41,9 +42,15 @@ class newUserRequest extends FormRequest
             'email.unique'=>'email must be unique!',
             'name.required' => 'name is required!',
             'phone.required' => 'phone is required!',
-            'phone.string' => 'phone is string!',
+            'phone.string' => 'phone must be string!',
+            'phone.unique'=>'phone must be unique!',
+            'phone.min:10'=>'phone min must be 10 numbers!',
+            'phone.max:14'=>'phone max must be 14 numbers!',
             'email.required' => 'email is required!',
             'email.email' => 'email must be valid email address!',
-        ];
+            'role.required' => 'role is required!',
+            'role.string' => 'role must be string!',
+            'role.in:1,0' => 'phone must be 0 or 1 !',
+            ];
     }
 }

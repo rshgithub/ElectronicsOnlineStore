@@ -7,29 +7,25 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="shadow p-3 mb-5 bg-body rounded">
-                            <h3 class="text-center">Categories Table</h3>
+                            <h3 class="text-center">Ad Images Table</h3>
                         </div>
-                        <a href="{{ route('categories.create') }}" class="btn btn-outline-warning" role="button" aria-pressed="true">Creat New Category</a>
+                        <a href="{{ route('ads.create') }}" class="btn btn-outline-secondary" role="button" aria-pressed="true">Creat New Ad Image</a>
                         </p>
                         <table class="table table-striped">
                             <thead>
                             <tr class="table-warning text-center">
                                 <th> id </th>
-                                <th> title </th>
-                                <th> products count </th>
-                                <th> category products </th>
+                                <th> image </th>
                                 <th> options </th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($categories as $category)
+                            @foreach($ads as $ad)
                                 <tr class="text-center">
-                                    <td>{{ $category->id }}</td>
-                                    <td>{{ $category->title }}</td>
-                                    <td>{{ $category->products_count }}</td>
-                                    <td><a href="{{ route('categories.getCategoryProducts',$category->id) }}" class="btn btn-outline-primary">products</a><td>
+                                    <td>{{ $ad->id }}</td>
+                                    <td> <img src="{{ $ad->image }}"> </td>
                                     <td>
-                                        <form action="{{ route('categories.destroy',$category->id) }}" method="post" style="display: inline-block">
+                                        <form action="{{ route('ads.destroy',$ad->id) }}" method="post" style="display: inline-block">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-outline-danger">Delete</button>

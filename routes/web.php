@@ -33,6 +33,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('categories', CategoriesController::class);
     Route::resource('products', ProductsController::class);
+    Route::resource('ads', \App\Http\Controllers\Control_Panel\AdsController::class);
 
 });
 

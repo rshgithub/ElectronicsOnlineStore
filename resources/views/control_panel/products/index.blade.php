@@ -1,4 +1,4 @@
-@extends('control_panel.master')
+@extends('control_panel.components.master')
 @section('content')
 
     <!-- partial -->
@@ -24,7 +24,6 @@
                                 <th>Status</th>
                                 <th>Options</th>
                             </tr>
-
                             @foreach($products as $product)
                                 <tr class="text-center">
                                     <td>{{ $product->id }}</td>
@@ -33,10 +32,13 @@
                                     <td>{{ $product->category_title }}</td>
                                     <td>{{ $product->price }}</td>
                                     <td>{{ $product->description }}</td>
-                                    <td>{{ $product->product_status }}</td>
+                                    @if($product->product_status == 'New')
+                                        <td><label class="badge badge-success">{{ $product->product_status }}</label></td>
+                                    @else
+                                        <td><label class="badge badge-warning">{{ $product->product_status }}</label></td>
+                                    @endif
                                     <td>
                                         <a href="{{ route('products.edit',$product->id) }}"class="btn btn-outline-warning">Edit</a>
-
                                         <form action="{{ route('products.destroy',$product->id) }}" method="post" style="display: inline-block">
                                             @csrf
                                             @method('DELETE')

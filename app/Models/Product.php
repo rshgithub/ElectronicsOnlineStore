@@ -14,11 +14,9 @@ class Product extends Model
 
     protected $hidden = ['created_at', 'updated_at' ,'deleted_at', 'category' ];
 
-    protected $appends = ['category_title','image'];
+    protected $appends = ['category_title'];
 
-//    public function getImageAttribute(){
-//        return $this->image ? url('/storage/'.$this->image) : "no image for this product";
-//    }
+
 
     public function category()
     {

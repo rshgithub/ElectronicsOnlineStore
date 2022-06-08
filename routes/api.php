@@ -1,13 +1,12 @@
 <?php
 
+use App\Http\Controllers\Api\AdsController;
+use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\API\Auth\ChangePasswordController;
 use App\Http\Controllers\Api\CategoriesController;
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\ProductsController;
 use App\Http\Controllers\Api\UsersController;
-use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Auth\RegisteredUserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,14 +21,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::post('login', [AuthenticatedSessionController::class, 'login']);
+// -------------------------------------------------------------------------
 
-Route::resource('register', RegisteredUserController::class);
+
+Route::post('login', [AuthController::class, 'login']);
+Route::post('register', [AuthController::class, 'register']);
+
 
 Route::middleware(['auth:sanctum'])->group(function () {
 
-    Route::post('logout', [AuthenticatedSessionController::class, 'logout']);
-    Route::post('changePassword', [AuthenticatedSessionController::class, 'changePassword']);
+    Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('changePassword', [ChangePasswordController::class, 'changePassword']);
 
     // ----------------------------------------------------- users -----------------------------------------------------
 
@@ -46,13 +48,22 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::apiResource('home', HomeController::class);
 
-    // ------------------------------------------------------ Users ---------------------------------------------------
+    // ------------------------------------------------------ Products ---------------------------------------------------
+
+    Route::get('search', [ProductsController::class, 'search']);
+    Route::get('searchProduct', [ProductsController::class, 'searchProduct']);
+
+    // ------------------------------------------------------ Products ---------------------------------------------------
 
     Route::get('getDeletedProducts', [ProductsController::class, 'getDeletedProducts']);
     Route::get('getProductsWithDeleted', [ProductsController::class, 'getProductsWithDeleted']);
     Route::get('restoreDeletedProduct/{id}', [ProductsController::class, 'restoreDeletedProduct']);
 
-    Route::resource('products',ProductsController::class);
+    Route::resource('products', ProductsController::class);
+
+    // ------------------------------------------------------ Ads ---------------------------------------------------
+
+    Route::resource('ads',AdsController::class);
 
     // ------------------------------------------------------ Users ---------------------------------------------------
 
