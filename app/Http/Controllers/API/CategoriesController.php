@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Categories\newCategoryRequest;
 use App\Http\Requests\Categories\updateCategoryRequest;
+use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use Illuminate\Support\Facades\Cache;
 
@@ -22,7 +23,7 @@ class CategoriesController extends Controller
         $categories = Cache::rememberForever('catrgory_cache', function () {
             return Category::all();
         });
-        return response()->json(['message' => 'success', 'data' => $categories ]);
+        return response()->json(['message' => 'success', 'data' => CategoryResource::collection($categories) ]);
 
     }
 
@@ -74,7 +75,7 @@ class CategoriesController extends Controller
     {
 
         $category = Category::create($request->validated());
-        return response()->json(['message' => 'success', 'data' => $category]);
+        return response()->json(['message' => 'success', 'data' => CategoryResource::make($category)]);
     }
 
     /**
@@ -85,7 +86,7 @@ class CategoriesController extends Controller
      */
     public function show($category){
         if($category) {
-            return response()->json(['message'=>'success' , 'data'=> $category]);
+            return response()->json(['message'=>'success' , 'data'=> CategoryResource::make($category)]);
         }else{
             return response()->json(['message' => 'this Category does not exist']);
         }
@@ -111,7 +112,7 @@ class CategoriesController extends Controller
     {
         if($category) {
             $category->update($request->validated());
-            return response()->json(['message'=>'success' , 'data'=> $category]);
+            return response()->json(['message'=>'success' , 'data'=> CategoryResource::make($category)]);
         }else{
             return response()->json(['message' => 'this Category does not exist']);
         }

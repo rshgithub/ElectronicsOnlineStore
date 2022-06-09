@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Requests\Users\newUserRequest;
 use App\Http\Requests\Users\updateUserRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 
 class UsersController extends Controller
@@ -73,7 +74,7 @@ class UsersController extends Controller
     public function show($user)
     {
         if ($user) {
-            return response()->json(['message' => 'success', 'data' => $user]);
+            return response()->json(['message' => 'success', 'data' => UserResource::make($user)]);
         } else {
             return response()->json(['message' => 'this user does not exist']);
         }
@@ -100,7 +101,7 @@ class UsersController extends Controller
     {
         if ($user) {
             $user->update($request->validated());
-            return response()->json(['message' => 'success', 'data' => $user]);
+            return response()->json(['message' => 'success', 'data' => UserResource::make($user)]);
         } else {
             return response()->json(['message' => 'this user does not exist']);
         }

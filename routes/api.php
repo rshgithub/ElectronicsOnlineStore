@@ -45,7 +45,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     // ------------------------------------------------------ Users ---------------------------------------------------
 
-    Route::apiResource('home', HomeController::class);
+    Route::resource('home', HomeController::class);
 
     // ------------------------------------------------------ Products ---------------------------------------------------
 

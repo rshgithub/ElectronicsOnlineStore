@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Ads\newAdRequest;
 use App\Http\Requests\Ads\updateAdRequest;
+use App\Http\Resources\AdResource;
 use App\Models\Ad;
 use Illuminate\Http\Request;
 
@@ -44,7 +45,7 @@ class AdsController extends Controller
     public function getAllAds()
     {
         $ads = Ad::orderBy('id', 'desc')->take(4)->get();
-        return response()->json(['message' => 'success', 'data' => $ads]);
+        return response()->json(['message' => 'success', 'data' => AdResource::collection($ads)]);
     }
 
     /**
@@ -70,7 +71,7 @@ class AdsController extends Controller
             $file = $request->image->store('public','public');
             $ad->update(['image'=>$file]);
         }
-        return response()->json(['message' => 'success']);
+        return response()->json(['message' => 'success', 'data' => AdResource::make($ad)]);
 
     }
 
@@ -83,7 +84,7 @@ class AdsController extends Controller
     public function show($ad)
     {
         if ($ad) {
-            return response()->json(['message' => 'success', 'data' => $ad]);
+            return response()->json(['message' => 'success', 'data' => AdResource::make($ad)]);
         } else {
             return response()->json(['message' => 'this ad does not exist']);
         }
@@ -114,7 +115,7 @@ class AdsController extends Controller
                 $file = $request->image->store('public','public');
                 $ad->update(['image'=>$file]);
             }
-            return response()->json(['message' => 'success', 'data' => $ad]);
+            return response()->json(['message' => 'success', 'data' => AdResource::make($ad)]);
         } else {
             return response()->json(['message' => 'this ad does not exist']);
         }

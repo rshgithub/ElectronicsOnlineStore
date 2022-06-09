@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CategoryResource;
 use App\Http\Resources\productResource;
 use App\Models\Category;
 use App\Models\Product;
@@ -17,8 +18,8 @@ class HomeController extends Controller
         return response()->json([
             'message' => 'Welcome to our electronics online store',
             'data' => [
-                'categories' => $categories,
-                'products' => productResource::make($products),
+                'categories' => CategoryResource::collection($categories),
+                'products' => productResource::collection($products),
             ],
         ], 200);
     }

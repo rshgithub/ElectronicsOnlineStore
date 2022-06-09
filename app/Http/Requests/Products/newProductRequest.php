@@ -30,7 +30,7 @@ class newProductRequest extends FormRequest
             'status' =>  'required|numeric|in:0,1',
             'description'=>'required|max:1000',
             'price'=>'required|numeric',
-            'image'=>'required|image|mimes:jpg,png,jpeg'
+            'image'=>'sometimes|image|mimes:jpg,png,jpeg'
 
         ];
     }
@@ -52,7 +52,6 @@ class newProductRequest extends FormRequest
             'price.numeric' => 'price must be numeric!',
             'image.mimes' => 'image directory must be jpg or png or jpeg!',
             'image.image' => 'file must be an image!',
-            'image.required' => 'image is required'
         ];
     }
 }

@@ -25,7 +25,7 @@ class newAdRequest extends FormRequest
     {
         return [
 
-            'image'=>'required|image|mimes:jpg,png,jpeg'
+            'image'=>'sometimes|image|mimes:jpg,png,jpeg'
 
         ];
     }
@@ -36,7 +36,6 @@ class newAdRequest extends FormRequest
 
             'image.mimes' => 'image directory must be jpg or png or jpeg!',
             'image.image' => 'file must be an image!',
-            'image.required' => 'image is required'
         ];
     }
 }
