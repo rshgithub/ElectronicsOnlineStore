@@ -26,7 +26,7 @@ class updateUserRequest extends FormRequest
         return [
             'name' => 'sometimes|string|max:25'.$this->user_id,
             'email' => 'sometimes|string|email|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix|max:255|unique:users,id',
-            'phone' =>  'sometimes|string|min:10|max:14|unique:users,id',
+            'phone' =>  'sometimes|string|min:10|max:14',
         ];
     }
 
