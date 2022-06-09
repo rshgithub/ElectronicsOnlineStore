@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Filesystem\Cache;
 
 class Category extends Model
 {
@@ -30,7 +31,12 @@ class Category extends Model
         parent::boot();
 
         static::deleting(function($category) {
+            Cache::forget('category_cache');
             $category->products()->delete();
+
+        });
+        static::updating(function($category) {
+            Cache::forget('category_cache');
         });
     }
 

@@ -29,7 +29,7 @@
                                     <td>{{ $category->id }}</td>
                                     <td>{{ $category->title }}</td>
                                     <td>{{ $category->products_count }}</td>
-                                    <td><a href="{{ route('categories.getCategoryProducts',$category->id) }}"
+                                    <td><a href="{{ route('categories.CategoryProducts',$category->id) }}"
                                            class="btn btn-outline-primary">products</a>
                                     <td>
                                     <td>

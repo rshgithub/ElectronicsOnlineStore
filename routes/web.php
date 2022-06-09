@@ -31,7 +31,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('users', UsersController::class);
 
-    Route::get('/getCategoryProducts/{id}', [CategoriesController::class,'getCategoryProducts'])->name('categories.getCategoryProducts');
+    Route::get('/CategoryProducts/{id}', [CategoriesController::class,'getCategoryProducts'])->name('categories.CategoryProducts');
 
     Route::resource('categories', CategoriesController::class);
     Route::resource('products', ProductsController::class);
@@ -41,6 +41,6 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->name('dashboard');
 
 require __DIR__.'/auth.php';
