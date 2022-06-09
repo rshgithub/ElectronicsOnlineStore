@@ -1,4 +1,4 @@
-@extends('control_panel.components.master')
+@extends('components.master')
 @section('content')
 
 <div class="col-md-12 grid-margin stretch-card">

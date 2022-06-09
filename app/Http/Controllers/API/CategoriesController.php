@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Categories\newCategoryRequest;
 use App\Http\Requests\Categories\updateCategoryRequest;
 use App\Models\Category;
+use Illuminate\Support\Facades\Cache;
+
 use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
@@ -17,7 +19,11 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        return response()->json( Category::all());
+        $categories = Cache::rememberForever('catrgory_cache', function () {
+            return Category::all();
+        });
+        return response()->json(['message' => 'success', 'data' => $categories ]);
+
     }
 
     public function getDeletedCategories()

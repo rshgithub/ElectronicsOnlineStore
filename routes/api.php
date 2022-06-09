@@ -20,7 +20,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 // -------------------------------------------------------------------------
 
 
@@ -38,8 +37,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('AllUsers', [UsersController::class, 'deleteAllUsers']);
     Route::get('UserProfile/{id}', [UsersController::class, 'getUserProfile']);
 
-    Route::get('getDeletedUsers', [UsersController::class, 'getDeletedUsers']);
-    Route::get('getUsersWithDeleted', [UsersController::class, 'getUsersWithDeleted']);
+    Route::get('DeletedUsers', [UsersController::class, 'getDeletedUsers']);
+    Route::get('UsersWithDeleted', [UsersController::class, 'getUsersWithDeleted']);
     Route::get('restoreDeletedUser/{id}', [UsersController::class, 'restoreDeletedUser']);
 
     Route::resource('users', UsersController::class);
@@ -50,26 +49,24 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     // ------------------------------------------------------ Products ---------------------------------------------------
 
-    Route::get('search', [ProductsController::class, 'search']);
     Route::get('searchProduct', [ProductsController::class, 'searchProduct']);
-
-    // ------------------------------------------------------ Products ---------------------------------------------------
-
-    Route::get('getDeletedProducts', [ProductsController::class, 'getDeletedProducts']);
-    Route::get('getProductsWithDeleted', [ProductsController::class, 'getProductsWithDeleted']);
+    Route::get('DeletedProducts', [ProductsController::class, 'getDeletedProducts']);
+    Route::get('ProductsWithDeleted', [ProductsController::class, 'getProductsWithDeleted']);
     Route::get('restoreDeletedProduct/{id}', [ProductsController::class, 'restoreDeletedProduct']);
 
     Route::resource('products', ProductsController::class);
 
     // ------------------------------------------------------ Ads ---------------------------------------------------
 
+    Route::get('AllAds', [AdsController::class, 'getAllAds']);
+
     Route::resource('ads',AdsController::class);
 
     // ------------------------------------------------------ Users ---------------------------------------------------
 
-    Route::get('getDeletedCategories', [CategoriesController::class, 'getDeletedCategories']);
-    Route::get('getCategoriesWithDeleted', [CategoriesController::class, 'getCategoriesWithDeleted']);
-    Route::get('getCategoryProducts/{id}', [CategoriesController::class, 'getCategoryProducts']);
+    Route::get('DeletedCategories', [CategoriesController::class, 'getDeletedCategories']);
+    Route::get('CategoriesWithDeleted', [CategoriesController::class, 'getCategoriesWithDeleted']);
+    Route::get('CategoryProducts/{id}', [CategoriesController::class, 'getCategoryProducts']);
     Route::get('restoreDeletedCategory/{id}', [CategoriesController::class, 'restoreDeletedCategory']);
 
     Route::resource('categories', CategoriesController::class);

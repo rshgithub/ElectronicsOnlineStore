@@ -1,4 +1,4 @@
-@extends('control_panel.components.master')
+@extends('components.master')
 @section('content')
 
     <!-- partial -->

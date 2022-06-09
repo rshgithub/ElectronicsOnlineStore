@@ -40,7 +40,6 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
 
-
         Route::bind('user',function($model_id){
             $model = User::find($model_id);
             if($model){

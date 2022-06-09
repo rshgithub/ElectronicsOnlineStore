@@ -60,9 +60,11 @@ class ProductsController extends Controller
      */
     public function store(newProductRequest $request)
     {
-
         $product = Product::create($request->validated());
-        //file
+        if($request->file){
+            $file = $request->file->store('public','public');
+            $product->create(['image'=>$file]);
+        }
         return response()->json(['message' => 'success', 'data' => ProductResource::make($product)]);
     }
 
@@ -100,7 +102,10 @@ class ProductsController extends Controller
     {
         if($product) {
             $product->update($request->validated());
-            //file
+            if($request->image){
+                $file = $request->image->store('public','public');
+                $product->update(['image'=>$file]);
+            }
             return response()->json(['message'=>'success' , 'data'=> ProductResource::make($product)]);
         }else{
             return response()->json(['message' => 'this Product does not exist']);
@@ -123,11 +128,11 @@ class ProductsController extends Controller
     }
 
 
-    public function search(Request $name)
-    {
-        $product = Product::where('name', $name)->get();
-        return response()->json(['message'=>'success', 'data'=> ProductResource::collection($product)]);
-    }
+//    public function search(Request $name)
+//    {
+//        $product = Product::where('name', $name)->get();
+//        return response()->json(['message'=>'success', 'data'=> ProductResource::collection($product)]);
+//    }
 
 
     public function searchProduct(Request $request)

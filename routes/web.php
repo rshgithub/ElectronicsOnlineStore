@@ -18,7 +18,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+Route::get('/', function () {
+    return redirect(route('login'));
+});
 
 Route::resource('auth', AuthenticatedSessionController::class);
 Route::resource('register', RegisteredUserController::class);
@@ -36,14 +38,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('ads', \App\Http\Controllers\Control_Panel\AdsController::class);
 
 });
-
-Route::get('/', function () {
-    return redirect(route('login'));
-});
-
-//Route::get('/', function () {
-//    return view('welcome');
-//});
 
 Route::get('/dashboard', function () {
     return view('dashboard');

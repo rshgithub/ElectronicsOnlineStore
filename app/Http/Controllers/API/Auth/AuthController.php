@@ -22,14 +22,12 @@ class AuthController extends Controller
 
         User::creating(function ($user) {
             $user->password = Hash::make($user->password);
-//            $user->verification_code = rand(100000, 999999);
         });
 
         $user = User::create($validated);
 
         $token = $user->createToken('authtoken');
 
-//        return response()->json(['message' => 'User Registered successfully', 'data' => ['user' => $user, 'token' => $token->plainTextToken, 'verification_code' => $user->verification_code]]);
         return response()->json(['message' => 'User Registered successfully', 'data' => ['user' => $user, 'token' => $token->plainTextToken]]);
     }
 
@@ -39,9 +37,6 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if ($user) {
-
-//            if(!$user->verified_at){return response()->json(['message' => 'user not verified',],404);}
-
             $user->makeVisible('password');
             if (Hash::check($request->password, $user->password)) { // true}else{//false}
                 $token = $user->createToken('authtoken');

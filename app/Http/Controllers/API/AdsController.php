@@ -41,6 +41,12 @@ class AdsController extends Controller
         }
     }
 
+    public function getAllAds()
+    {
+        $ads = Ad::orderBy('id', 'desc')->take(4)->get();
+        return response()->json(['message' => 'success', 'data' => $ads]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -60,14 +66,10 @@ class AdsController extends Controller
     public function store(newAdRequest $request)
     {
         $ad = Ad::create($request->validated());
-        if ($request->hasFile('image')) {
-            $file = $request->file->store('product', 'public');
-            $ad->create(['name' => $file]);
+        if($request->image){
+            $file = $request->image->store('public','public');
+            $ad->update(['image'=>$file]);
         }
-//        if ($request->file) {
-//            $file = $request->file->store('public', 'public');
-//            $ad->media()->create(['name' => $file]);
-//        }
         return response()->json(['message' => 'success']);
 
     }
@@ -108,7 +110,10 @@ class AdsController extends Controller
     {
         if ($ad) {
             $ad->update($request->validated());
-            // if has file
+            if($request->image){
+                $file = $request->image->store('public','public');
+                $ad->update(['image'=>$file]);
+            }
             return response()->json(['message' => 'success', 'data' => $ad]);
         } else {
             return response()->json(['message' => 'this ad does not exist']);

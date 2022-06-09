@@ -26,7 +26,7 @@
 
 <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
-    @include("layouts.nabbar")
+    @include("layouts.navbar")
     <!-- partial -->
         <div class="container-fluid page-body-wrapper">
             <!-- partial:partials/_settings-panel.html -->
@@ -36,10 +36,18 @@
             <!-- partial:partials/_sidebar.html -->
         @include("layouts.sidebar")
 
-        @yield('content')
+
+
         <!-- main-panel ends -->
+
+
+        @yield('content')
+        <!-- partial -->
     </div>
     <!-- page-body-wrapper ends -->
+    <!-- content-wrapper ends -->
+    <!-- partial:partials/_footer.html -->
+    @include("layouts.footer")
 </div>
 
 <!-- container-scroller -->

@@ -40,7 +40,12 @@ class AdsController extends Controller
      */
     public function store(newAdRequest $request)
     {
-
+        $ad = Ad::create($request->validated());
+        if($request->image){
+            $file = $request->image->store('public','public');
+            $ad->update(['image'=>$file]);
+        }
+        return redirect(route('ads.index'));
     }
 
     /**
@@ -80,6 +85,10 @@ class AdsController extends Controller
     {
         if($ad) {
             $ad->update($request->validated());
+            if($request->image){
+                $file = $request->image->store('public','public');
+                $ad->update(['image'=>$file]);
+            }
             return redirect(route('ads.index'));
 //            redirect(route('categories.index')->with('success','You edited the Category successfully.'));
         }else{

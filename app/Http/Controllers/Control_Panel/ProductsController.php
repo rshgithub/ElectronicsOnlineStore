@@ -48,24 +48,11 @@ class ProductsController extends Controller
     public function store(newProductRequest $request)
     {
         $product = Product::create($request->validated());
-//        $request->image->store('public','public');
-
-
-//        if($request->image){
-//            $file = $request->image->store('public','public');
-//            $product->create(['image'=>$file]);
-//        }
-
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $fileName = time() . '.' . $file->getClientOriginalExtension();
-            $product->image = 'attachments/' . $fileName;
-            Storage::disk('public')->put('attachments/' . $fileName, $file, 'public');
+        if($request->image){
+            $file = $request->image->store('public','public');
+            $product->update(['image'=>$file]);
         }
-
-        dd($product);
         return redirect(route('products.index'));
-//        redirect(route('products.index')->with('success','You added a Product successfully.'));
     }
 
     /**
@@ -106,10 +93,9 @@ class ProductsController extends Controller
     {
         if($product) {
             $product->update($request->validated());
-
-            $file = $request->image->store('public','public');
-            if($request->hasFile('image')){
-                $product->update(['name'=>$file]);
+            if($request->image){
+                $file = $request->image->store('public','public');
+                $product->update(['image'=>$file]);
             }
             return redirect(route('products.index'));
 //            redirect(route('products.index')->with('success','You edited the Product successfully.'));

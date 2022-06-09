@@ -14,18 +14,12 @@ class Product extends Model
 
     protected $hidden = ['created_at', 'updated_at' ,'deleted_at', 'category' ];
 
-    protected $appends = ['category_title'];
-
+    protected $appends = ['category_title','product_image'];
 
 
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'id')->withDefault(['name' => 'no related category']);
-    }
-
-    public function getDishCategoryNameAttribute()
-    {
-        return $this->category ? $this->category->title : 'category not found';
     }
 
     public function getCategoryTitleAttribute()
@@ -37,5 +31,8 @@ class Product extends Model
         if($this->status == 0) { return 'Old'; } else { return 'New'; }
     }
 
+    public function getProductImageAttribute(){
+        return $this->image ? url('/storage/'.$this->image) : 'no image';
+    }
 
 }

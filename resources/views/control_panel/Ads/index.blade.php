@@ -1,4 +1,4 @@
-@extends('control_panel.components.master')
+@extends('components.master')
 @section('content')
 
     <div class="main-panel">
@@ -23,8 +23,9 @@
                             @foreach($ads as $ad)
                                 <tr class="text-center">
                                     <td>{{ $ad->id }}</td>
-                                    <td> <img src="{{ $ad->image }}"> </td>
+                                    <td> <img src="{{ $ad->ad_image }}"> </td>
                                     <td>
+                                        <a href="{{ route('ads.edit',$ad->id) }}"class="btn btn-outline-warning">Edit</a>
                                         <form action="{{ route('ads.destroy',$ad->id) }}" method="post" style="display: inline-block">
                                             @csrf
                                             @method('DELETE')
@@ -39,15 +40,5 @@
                 </div>
             </div>
         </div>
-
-    <!-- content-wrapper ends -->
-    <!-- partial:partials/_footer.html -->
-    <footer class="footer">
-        <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021. Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash. All rights reserved.</span>
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ml-1"></i></span>
-        </div>
-    </footer>
-    <!-- partial -->
 </div>
 @endsection
