@@ -20,10 +20,8 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Cache::rememberForever('category_cache', function () {
-            return Category::all();
-        });
-        return response()->json(['message' => 'success', 'data' => CategoryResource::collection($categories) ]);
+
+        return response()->json(['message' => 'success', 'data' => CategoryResource::collection( Category::all()) ]);
 
     }
 

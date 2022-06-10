@@ -5,7 +5,7 @@
         <div class="card">
             <div class="card-body" style="width: 900px">
                 <h4 class="card-title">Edit product form</h4>
-                <img class="rounded"  width="200px" height="200px"  style="margin-bottom: 20px" src="{{ old('image',$product->image) }}">
+                <img class="rounded"  width="200px" height="200px"  style="margin-bottom: 20px" src="{{ old('image',$product->product_image) }}">
                 <form class="forms-sample" action="{{ route('products.update' , $product->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('put')

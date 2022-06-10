@@ -36,11 +36,11 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('categories', CategoriesController::class);
     Route::resource('products', ProductsController::class);
     Route::resource('ads', \App\Http\Controllers\Control_Panel\AdsController::class);
-
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+
 
 require __DIR__.'/auth.php';
