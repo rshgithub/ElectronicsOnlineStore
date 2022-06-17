@@ -28,10 +28,23 @@
                                 <tr class="text-center">
                                     <td>{{ $category->id }}</td>
                                     <td>{{ $category->title }}</td>
-                                    <td>{{ $category->products_count }}</td>
-                                    <td><a href="{{ route('categories.CategoryProducts',$category->id) }}"
-                                           class="btn btn-outline-primary">products</a>
-                                    <td>
+
+                                    @if($category->products_count == 0)
+                                        <td><label class="badge badge-danger">{{ $category->products_count }}</label>
+                                        </td>
+                                    @else
+                                        <td><label class="badge badge-success">{{ $category->products_count }}</label>
+                                        </td>
+                                    @endif
+
+                                    @if($category->products_count == 0)
+                                        <td class="text-danger" >No products yet</td>
+                                        <td></td>
+                                    @else
+                                        <td><a href="{{ route('categories.CategoryProducts',$category->id) }}"
+                                               class="btn btn-outline-primary">products</a>
+                                        <td>
+                                    @endif
                                     <td>
                                         <form action="{{ route('categories.destroy',$category->id) }}" method="post"
                                               style="display: inline-block">

@@ -57,6 +57,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::resource('products', ProductsController::class);
 
     // ------------------------------------------------------ Ads ---------------------------------------------------
+    Route::get('DeletedAds', [AdsController::class, 'getDeletedAds']);
+    Route::get('AdsWithDeleted', [AdsController::class, 'getAdsWithDeleted']);
+    Route::get('restoreDeletedAd/{id}', [AdsController::class, 'restoreDeletedAd']);
+    Route::get('AllAds', [AdsController::class, 'getAllAds']);
 
     Route::get('AllAds', [AdsController::class, 'getAllAds']);
 

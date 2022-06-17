@@ -18,7 +18,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        return response()->json( Product::all());
+        return response()->json( ProductResource::collection(Product::all()));
     }
 
     public function getDeletedProducts()

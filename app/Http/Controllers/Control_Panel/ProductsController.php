@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Requests\Products\newProductRequest;
 use App\Http\Requests\Products\updateProductRequest;
+use App\Models\Category;
 use App\Models\Hotel;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -36,7 +37,9 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return view('control_panel.products.create');
+
+        $categories = Category::all();
+        return view('control_panel.products.create' , compact('categories'));
     }
 
     /**
@@ -75,8 +78,9 @@ class ProductsController extends Controller
 
     public function edit($product){
 
+        $categories = Category::all();
         if($product) {
-            return view('control_panel.products.update',compact('product'));
+            return view('control_panel.products.update',compact('product','categories'));
         }else{
             return redirect('/')->with('error','this Product does not exist');
         }

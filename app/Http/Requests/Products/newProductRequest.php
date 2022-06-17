@@ -30,7 +30,7 @@ class newProductRequest extends FormRequest
             'status' =>  'required|numeric|in:0,1',
             'description'=>'required|max:1000',
             'price'=>'required|numeric',
-            'image'=>'sometimes|image|mimes:jpg,png,jpeg'
+            'image'=>'required|image|mimes:jpg,png,jpeg'
 
         ];
     }
@@ -40,9 +40,9 @@ class newProductRequest extends FormRequest
         return [
             'name.required' => 'Name is required!',
             'name.string' => 'Name must be string!',
-            'category_id.required' => 'category_id is required!',
-            'category_id.numeric' => 'category_id must be numeric!',
-            'category_id.exists' => 'category_id must exist in categories table!',
+            'category_id.required' => 'category id is required!',
+            'category_id.numeric' => 'category id must be numeric!',
+            'category_id.exists' => 'category id must exist in categories table!',
             'status.required' => 'status is required!',
             'status.numeric' => 'status must be numeric!',
             'status.in:0,1' => 'status must be in:0,1!',
@@ -52,6 +52,7 @@ class newProductRequest extends FormRequest
             'price.numeric' => 'price must be numeric!',
             'image.mimes' => 'image directory must be jpg or png or jpeg!',
             'image.image' => 'file must be an image!',
+            'image.required' => 'image is required!',
         ];
     }
 }

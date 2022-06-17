@@ -38,8 +38,8 @@ class updateProductRequest extends FormRequest
     {
         return [
             'name.string' => 'Name must be string!',
-            'category_id.numeric' => 'category_id must be numeric!',
-            'category_id.exists' => 'category_id must exist in categories table!',
+            'category_id.numeric' => 'category id must be numeric!',
+            'category_id.exists' => 'category id must exist in categories table!',
             'status.numeric' => 'status must be numeric!',
             'status.in:0,1' => 'status must be in:0,1!',
             'description.max:1000' => 'description text max:1000!',

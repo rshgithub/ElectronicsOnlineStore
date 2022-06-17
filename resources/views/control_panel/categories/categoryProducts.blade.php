@@ -27,7 +27,7 @@
                             @foreach($categoryProducts->products as $product)
                                 <tr class="text-center">
                                     <td>{{ $product->id }}</td>
-                                    <td> <img src="{{ $product->image }}"> </td>
+                                    <td> <img src="{{ $product->product_image }}"> </td>
                                     <td>{{ $product->name }}</td>
                                     <td>{{ $product->category_title }}</td>
                                     <td>{{ $product->price }}</td>
